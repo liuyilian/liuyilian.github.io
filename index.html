@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script type="text/javascript" src="../lib/vue.js" ></script>
+		<script type="text/javascript" src="../lib/jquery/dist/jquery.min.js"></script>
+	</head>
+	<body>
+		<div id='app'>
+			Welcome to my Page
+		</div>
+		<div id='app1'>
+			<input type="" name="">
+				{{a}}{{b}}
+			</input>
+			
+		</div>
+		<script type="text/javascript">
+			//创建一个Vue实例，VM是Vue Modle
+			/*var data={a:1};
+			var vm=new Vue({
+				el:'#app1',
+				data:data
+			})*/
+			//a will be changed
+			/*data.a=2;
+			data.b=1;//b wont be change*/
+			//响应式数据的创建，需要提前生成这个data的变量
+			//Object.freeze()会停止响应式
+
+			//VUe 还有一些实例属性￥
+			//e.g.
+			//watch
+
+			//watch a, when a changed, callback function will be fired
+			/*vm.$watch('a',function(newval,oldval){
+				alert('newval:'+newval+',oldval:'+oldval)
+			})*/
+
+			//vm.$data.a='test'
+
+			//lifecycle
+			//初始化
+			//生命周期写在VUE里面
+			count=0;
+			var vm=new Vue({
+				el:'#app1',
+				data:{
+					a:1
+				},
+				//实例初始化之后，页面创建之前,data observer和event/watcher实践配置之前被调用
+				beforecreated:function(){
+					console.log($.now()+', beforecreated is returned');
+				},
+				//实例创建后，但是挂在还没有开始$el不可看
+				//实例已经完成数据观测，属性和方法的运算，watch/event事件回调
+				created:function(){
+					count=count+1;
+					console.log($.now()+', created is returned at the'+count+' time(s)');
+				},
+				//挂载之前，元素·el挂载在DOM中,如果没有指定el,begoreMount和Mount都不会被回调
+				beforeMount:function () {
+					// body...
+					console.log($.now()+', beforeMount is returned');
+				},
+				//el被创建的vm.$el替换，挂载成功
+				mounted:function(){
+					console.log($.now()+', mounted is returned');
+				},
+				//数据更新调用
+				beforeUpdated:function(){
+					console.log($.now()+', beforeUpdated is returned');
+				},
+				//组件DOM已经更新，组件更新完毕
+				updated:function(){
+					console.log($.now()+', updated is returned');
+				}
+			})
+
+			/*var app=new Vue({
+				el:'#app',
+				data:{
+					message:'Hello Vue!',
+					name:'this is name'
+				}
+			})*/
+		</script>
+	</body>
+</html>
